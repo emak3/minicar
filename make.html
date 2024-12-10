@@ -35,8 +35,17 @@
       align-items: center;
     }
 
+    /* ボタン押下時の文字色変更 */
     button:active {
       color: red;
+    }
+
+    /* 画像の選択と保存防止 */
+    img {
+      pointer-events: none; /* イベントを無効化 */
+      user-drag: none; /* ドラッグ無効化 */
+      -webkit-user-drag: none; /* Webkit系ブラウザでドラッグ無効化 */
+      -webkit-touch-callout: none; /* 画像のコンテキストメニュー無効化 */
     }
 
     /* ボタンの位置を定義 */
@@ -63,7 +72,7 @@
 <body>
   <div class="controller">
     <!-- GoボタンをGIF画像に -->
-    <img class="go" id="goBtn" src="static/go_still.gif" 
+    <img class="go" id="goBtn" src="static/go_still.png" 
          onmousedown="startGif()" onmouseup="stopGif()">
 
     <button class="left" onmousedown="sendRequest('/LeftPress')" onmouseup="sendRequest('/LeftRelease')">L</button>
@@ -72,6 +81,11 @@
   </div>
 
   <script>
+    // 右クリック禁止
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
     function sendRequest(endpoint) {
       fetch(endpoint)
         .then(response => {
