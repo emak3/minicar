@@ -12,7 +12,7 @@
     }
 
     #goBtn {
-      width: 120px;
+      width: 100px;
       height: 100px;
       margin: 10px;
       user-select: none;  /* Prevents text selection */
@@ -41,10 +41,10 @@
 
     /* Prevent long-press to save image */
     img {
-      pointer-events: auto; /* イベントを有効化 */
-      user-drag: none; /* ドラッグ無効化 */
-      -webkit-user-drag: none; /* Webkit系ブラウザでドラッグ無効化 */
-      -webkit-touch-callout: none; /* 画像のコンテキストメニュー無効化 */
+      pointer-events: auto;
+      -webkit-touch-callout: none; /* Disable long press callout */
+      -webkit-user-select: none;
+      user-select: none;
     }
   </style>
 </head>
@@ -78,62 +78,47 @@
     function startGo() {
         isGoPressed = true;
         document.getElementById('goBtn').src = "static/go.gif";  // GIFを再生
-        checkButtons();
+        sendRequest('Go');  // Goボタンが押された時に即座にコマンドを送信
     }
 
     function stopGo() {
         isGoPressed = false;
         document.getElementById('goBtn').src = "static/go_still.png";  // GIFを停止
-        stopMovement();
+        stopMovement();  // Goボタンが離された時、移動を停止
     }
 
     function startLeft() {
         isLeftPressed = true;
-        checkButtons();
+        sendRequest('Left');  // Leftボタンが押された時に即座にコマンドを送信
     }
 
     function stopLeft() {
         isLeftPressed = false;
-        stopMovement();
+        sendRequest('StopLeft');  // Leftボタンを離した時に停止コマンドを送信
     }
 
     function startRight() {
         isRightPressed = true;
-        checkButtons();
+        sendRequest('Right');  // Rightボタンが押された時に即座にコマンドを送信
     }
 
     function stopRight() {
         isRightPressed = false;
-        stopMovement();
+        sendRequest('StopRight');  // Rightボタンを離した時に停止コマンドを送信
     }
 
     function startBack() {
         isBackPressed = true;
-        checkButtons();
+        sendRequest('Back');  // Backボタンが押された時に即座にコマンドを送信
     }
 
     function stopBack() {
         isBackPressed = false;
-        stopMovement();
-    }
-
-    function checkButtons() {
-        if (isGoPressed) {
-            sendRequest('/GoPress');
-        }
-        if (isLeftPressed) {
-            sendRequest('/LeftPress');
-        }
-        if (isRightPressed) {
-            sendRequest('/RightPress');
-        }
-        if (isBackPressed) {
-            sendRequest('/BackPress');
-        }
+        sendRequest('StopBack');  // Backボタンを離した時に停止コマンドを送信
     }
 
     function stopMovement() {
-        sendRequest('/StopMovement');
+        sendRequest('StopMovement');  // すべてのボタンを離した時に移動を停止
     }
   </script>
 
