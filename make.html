@@ -3,19 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Button Control</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Motor Control</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      -webkit-user-select: none; /* コピー防止 */
+      user-select: none;
+    }
+
+    .controller {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .controller button, .controller img {
+      width: 100px;
+      height: 100px;
+      font-size: 24px;
+      background-color: white;
+      border: 2px solid black;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ボタン押下時の文字色変更 */
+    button:active {
+      color: red;
+    }
+
+    /* 画像の選択と保存防止 */
+    img {
+      pointer-events: auto; /* イベントを有効化 */
+      user-drag: none; /* ドラッグ無効化 */
+      -webkit-user-drag: none; /* Webkit系ブラウザでドラッグ無効化 */
+      -webkit-touch-callout: none; /* 画像のコンテキストメニュー無効化 */
+    }
+
+    /* ボタンの位置を定義 */
+    .go {
+      grid-column: 2 / 3;
+    }
+
+    .left {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .right {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+
+    .back {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+  </style>
 </head>
 <body>
+  <div class="controller">
+    <!-- GoボタンをGIF画像に -->
+    <img class="go" id="goBtn" src="static/go_still.png" 
+         onmousedown="startGif()" onmouseup="stopGif()"
+         ontouchstart="startGif()" ontouchend="stopGif()">
 
-  <div id="controls">
-    <!-- Go ボタンは動く -->
-    <img id="goBtn" src="static/go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
-    <button id="backBtn" ontouchstart="startBack()" ontouchend="stopBack()">Back</button>
-    <button id="leftBtn" ontouchstart="startLeft()" ontouchend="stopLeft()">Left</button>
-    <button id="rightBtn" ontouchstart="startRight()" ontouchend="stopRight()">Right</button>
+    <button class="left" onmousedown="sendRequest('/LeftPress')" onmouseup="sendRequest('/LeftRelease')">L</button>
+    <button class="right" onmousedown="sendRequest('/RightPress')" onmouseup="sendRequest('/RightRelease')">R</button>
+    <button class="back" onmousedown="sendRequest('/BackPress')" onmouseup="sendRequest('/BackRelease')">B</button>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // 右クリック禁止
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    function sendRequest(endpoint) {
+      fetch(endpoint)
+        .then(response => {
+          if (!response.ok) {
+            console.error('Request failed:', response.statusText);
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function startGif() {
+      document.getElementById("goBtn").src = "static/go.gif"; // GIFを再生
+      sendRequest('/GoPress');
+    }
+
+    function stopGif() {
+      document.getElementById("goBtn").src = "static/go_still.png"; // 静止画像に戻す
+      sendRequest('/GoRelease');
+    }
+  </script>
 </body>
 </html>
