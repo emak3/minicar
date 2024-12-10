@@ -41,10 +41,10 @@
 
     /* Prevent long-press to save image */
     img {
-      pointer-events: auto;
-      -webkit-touch-callout: none; /* Disable long press callout */
-      -webkit-user-select: none;
-      user-select: none;
+      pointer-events: auto; /* イベントを有効化 */
+      user-drag: none; /* ドラッグ無効化 */
+      -webkit-user-drag: none; /* Webkit系ブラウザでドラッグ無効化 */
+      -webkit-touch-callout: none; /* 画像のコンテキストメニュー無効化 */
     }
   </style>
 </head>
