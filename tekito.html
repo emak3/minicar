@@ -52,7 +52,7 @@
 
   <div id="controls">
     <!-- Go ボタンはGIF画像 -->
-    <img id="goBtn" src="go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
+    <img id="goBtn" src="static/go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
     
     <!-- Left と Right ボタンを横並び -->
     <div id="buttonsRow">
@@ -77,13 +77,13 @@
 
     function startGo() {
         isGoPressed = true;
-        document.getElementById('goBtn').src = "go.gif";  // GIFを再生
+        document.getElementById('goBtn').src = "static/go.gif";  // GIFを再生
         checkButtons();
     }
 
     function stopGo() {
         isGoPressed = false;
-        document.getElementById('goBtn').src = "go_still.png";  // GIFを停止
+        document.getElementById('goBtn').src = "static/go_still.png";  // GIFを停止
         stopMovement();
     }
 
