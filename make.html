@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,55 @@
       font-size: 16px;
       margin: 5px;
     }
+    
+    /* コピー無効 */
+    body {
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none;    /* Firefox */
+      -ms-user-select: none;     /* Internet Explorer/Edge */
+      user-select: none;         /* Standard */
+    }
   </style>
 </head>
 <body>
   <h1>Motor Control</h1>
-  <button onmousedown="sendRequest('/GoPress')"onmouseup="sendRequest('/GoRelease')">Go</button>
-  <button onmousedown="sendRequest('/BackPress')"onmouseup="sendRequest('/BackRelease')">Back</button>
-  <button onmousedown="sendRequest('/LeftPress')"onmouseup="sendRequest('/LeftRelease')">Lef</button>
-  <button onmousedown="sendRequest('/RightPress')"onmouseup="sendRequest('/RightRelease')">Right</button>
+
+  <!-- Go Button -->
+  <button 
+    onmousedown="sendRequest('/GoPress')" 
+    onmouseup="sendRequest('/GoRelease')"
+    ontouchstart="sendRequest('/GoPress')" 
+    ontouchend="sendRequest('/GoRelease')">
+    Go
+  </button>
+
+  <!-- Back Button -->
+  <button 
+    onmousedown="sendRequest('/BackPress')" 
+    onmouseup="sendRequest('/BackRelease')"
+    ontouchstart="sendRequest('/BackPress')" 
+    ontouchend="sendRequest('/BackRelease')">
+    Back
+  </button>
+
+  <!-- Left Button -->
+  <button 
+    onmousedown="sendRequest('/LeftPress')" 
+    onmouseup="sendRequest('/LeftRelease')"
+    ontouchstart="sendRequest('/LeftPress')" 
+    ontouchend="sendRequest('/LeftRelease')">
+    Left
+  </button>
+
+  <!-- Right Button -->
+  <button 
+    onmousedown="sendRequest('/RightPress')" 
+    onmouseup="sendRequest('/RightRelease')"
+    ontouchstart="sendRequest('/RightPress')" 
+    ontouchend="sendRequest('/RightRelease')">
+    Right
+  </button>
+
   <script>
     function sendRequest(endpoint) {
       fetch(endpoint)
