@@ -11,7 +11,22 @@
       align-items: center;
     }
 
-    img, button {
+    #goBtn {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      user-select: none;  /* Prevents text selection */
+      -webkit-user-select: none;
+      text-align: center;
+    }
+
+    #buttonsRow {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
       width: 100px;
       height: 100px;
       margin: 10px;
@@ -37,10 +52,16 @@
 
   <div id="controls">
     <!-- Go ボタンはGIF画像 -->
-    <img id="goBtn" src="static/go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
+    <img id="goBtn" src="go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
+    
+    <!-- Left と Right ボタンを横並び -->
+    <div id="buttonsRow">
+      <button id="leftBtn" ontouchstart="startLeft()" ontouchend="stopLeft()">Left</button>
+      <button id="rightBtn" ontouchstart="startRight()" ontouchend="stopRight()">Right</button>
+    </div>
+    
+    <!-- Back ボタン -->
     <button id="backBtn" ontouchstart="startBack()" ontouchend="stopBack()">Back</button>
-    <button id="leftBtn" ontouchstart="startLeft()" ontouchend="stopLeft()">Left</button>
-    <button id="rightBtn" ontouchstart="startRight()" ontouchend="stopRight()">Right</button>
   </div>
 
   <script>
@@ -56,13 +77,13 @@
 
     function startGo() {
         isGoPressed = true;
-        document.getElementById('goBtn').src = "static/go.gif";  // GIFを再生
+        document.getElementById('goBtn').src = "go.gif";  // GIFを再生
         checkButtons();
     }
 
     function stopGo() {
         isGoPressed = false;
-        document.getElementById('goBtn').src = "static/go_still.png";  // GIFを停止
+        document.getElementById('goBtn').src = "go_still.png";  // GIFを停止
         stopMovement();
     }
 
