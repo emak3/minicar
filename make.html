@@ -73,7 +73,8 @@
   <div class="controller">
     <!-- GoボタンをGIF画像に -->
     <img class="go" id="goBtn" src="static/go_still.png" 
-         onmousedown="startGif()" onmouseup="stopGif()">
+         onmousedown="startGif()" onmouseup="stopGif()"
+         ontouchstart="startGif()" ontouchend="stopGif()">
 
     <button class="left" onmousedown="sendRequest('/LeftPress')" onmouseup="sendRequest('/LeftRelease')">L</button>
     <button class="right" onmousedown="sendRequest('/RightPress')" onmouseup="sendRequest('/RightRelease')">R</button>
