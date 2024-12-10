@@ -9,6 +9,7 @@
       padding: 10px 20px;
       font-size: 16px;
       margin: 5px;
+      color: black; /* デフォルト色 */
     }
     
     /* コピー無効 */
@@ -17,6 +18,11 @@
       -moz-user-select: none;    /* Firefox */
       -ms-user-select: none;     /* Internet Explorer/Edge */
       user-select: none;         /* Standard */
+    }
+    
+    /* ボタンを押している間に文字色を赤くする */
+    button:active {
+      color: red;
     }
   </style>
 </head>
