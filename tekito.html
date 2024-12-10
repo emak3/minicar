@@ -84,7 +84,7 @@
     function stopGo() {
         isGoPressed = false;
         document.getElementById('goBtn').src = "static/go_still.png";  // GIFを停止
-        stopMovement();  // Goボタンが離された時、移動を停止
+        sendRequest('StopMovement');  // Goボタンが離された時、移動を停止
     }
 
     function startLeft() {
@@ -115,10 +115,6 @@
     function stopBack() {
         isBackPressed = false;
         sendRequest('StopBack');  // Backボタンを離した時に停止コマンドを送信
-    }
-
-    function stopMovement() {
-        sendRequest('StopMovement');  // すべてのボタンを離した時に移動を停止
     }
   </script>
 
