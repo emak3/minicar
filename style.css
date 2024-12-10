@@ -1,31 +1,26 @@
-html {
-    font-family: Helvetica;
-    display: inline-block;
-    margin: 0px auto;
-    text-align: center;
-  }
-  h1{
-    color: #0F3376;
-    padding: 2vh;
-  }
-  p{
-    font-size: 1.5rem;
-  }
-  .go_button {
-    display: inline-block;
-    background-color: #008CBA;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 16px 40px;
-    text-decoration: none;
-    font-size: 30px;
-    margin: 2px;
-    cursor: pointer;
-  }
-  .off_button {
-    background-color: #f44336;
-  }
-  .back_button {
-    background-color: #008CBA;
-  }
+#controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img, button {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  user-select: none;  /* Prevents text selection */
+  -webkit-user-select: none;
+  text-align: center;
+}
+
+img:active, button:active {
+  filter: brightness(0.8); /* Darkens the button on press */
+}
+
+/* Prevent long-press to save image */
+img {
+  pointer-events: auto;
+  -webkit-touch-callout: none; /* Disable long press callout */
+  -webkit-user-select: none;
+  user-select: none;
+}
