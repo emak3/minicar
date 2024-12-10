@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Control</title>
+  <style>
+    #controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img, button {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      user-select: none;  /* Prevents text selection */
+      -webkit-user-select: none;
+      text-align: center;
+    }
+
+    img:active, button:active {
+      filter: brightness(0.8); /* Darkens the button on press */
+    }
+
+    /* Prevent long-press to save image */
+    img {
+      pointer-events: auto;
+      -webkit-touch-callout: none; /* Disable long press callout */
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="controls">
+    <!-- Go ボタンはGIF画像 -->
+    <img id="goBtn" src="go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
+    <button id="backBtn" ontouchstart="startBack()" ontouchend="stopBack()">Back</button>
+    <button id="leftBtn" ontouchstart="startLeft()" ontouchend="stopLeft()">Left</button>
+    <button id="rightBtn" ontouchstart="startRight()" ontouchend="stopRight()">Right</button>
+  </div>
+
+  <script>
+    let isGoPressed = false;
+    let isLeftPressed = false;
+    let isRightPressed = false;
+    let isBackPressed = false;
+
+    function sendRequest(action) {
+      // Sends HTTP request to control the motor or servo (mock function)
+      console.log(`Action: ${action}`);
+    }
+
+    function startGo() {
+        isGoPressed = true;
+        document.getElementById('goBtn').src = "go.gif";  // GIFを再生
+        checkButtons();
+    }
+
+    function stopGo() {
+        isGoPressed = false;
+        document.getElementById('goBtn').src = "go_still.png";  // GIFを停止
+        stopMovement();
+    }
+
+    function startLeft() {
+        isLeftPressed = true;
+        checkButtons();
+    }
+
+    function stopLeft() {
+        isLeftPressed = false;
+        stopMovement();
+    }
+
+    function startRight() {
+        isRightPressed = true;
+        checkButtons();
+    }
+
+    function stopRight() {
+        isRightPressed = false;
+        stopMovement();
+    }
+
+    function startBack() {
+        isBackPressed = true;
+        checkButtons();
+    }
+
+    function stopBack() {
+        isBackPressed = false;
+        stopMovement();
+    }
+
+    function checkButtons() {
+        if (isGoPressed) {
+            sendRequest('/GoPress');
+        }
+        if (isLeftPressed) {
+            sendRequest('/LeftPress');
+        }
+        if (isRightPressed) {
+            sendRequest('/RightPress');
+        }
+        if (isBackPressed) {
+            sendRequest('/BackPress');
+        }
+    }
+
+    function stopMovement() {
+        sendRequest('/StopMovement');
+    }
+  </script>
+
+</body>
+</html>
