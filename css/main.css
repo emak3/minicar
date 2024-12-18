@@ -1,101 +1,63 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap");
-
-html,
-body {
-  height: 100%;
-}
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
 
 body {
-  background-color: #3d3e4a;
+  margin: 0;
+  padding: 0;
+  cursor: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: #161616;
+}
+
+.nav-wrapper nav {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.container {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.radio-btn-group {
-  margin: 10px;
-}
-
-input[type="radio"] {
-  opacity: 0;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
   position: absolute;
+  top: 50%;
 }
 
-input[type="radio"]:checked + label {
-  &::before {
-    box-shadow: 0 0 25px 2px #244f2e;
-  }
-
-  span {
-    color: #fff;
-  }
+.link {
+  transition: all 0.3s ease;
 }
 
-input[type="radio"]:focus + label {
-  &::before {
-    box-shadow: 0 0 25px 2px #244f2e;
-  }
-}
-
-label {
+.link span {
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
   color: #fff;
-  cursor: pointer;
-  display: flex;
-  font-weight: 500;
-  font-style: italic;
-  align-items: center;
-  justify-content: center;
-  font-family: "IBM Plex Mono", monospace;
-  height: 50px;
-  padding: 0 30px;
-  position: relative;
+  font-size: 36px;
+  text-transform: uppercase;
+  pointer-event: none;
+  transition: transform 0.1s linear;
+}
 
-  &::before {
-    background-color: #24252c;
-    background-image: repeating-linear-gradient(
-      0deg,
-      #181a29,
-      #181a29 1px,
-      #202436 1px,
-      #202436 2px
-    );
-    border-radius: 10px;
-    box-shadow: 0 0 0 0 #244f2e;
-    content: "";
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-    transform: skew(-15deg);
-    transition: box-shadow 700ms;
-    width: 100%;
-    z-index: -1;
+.cursor {
+  pointer-events: none;
+  position: fixed;
+  padding: 0.3rem;
+  background-color: #fff;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  transition: transform 0.3s ease;
+}
+
+.link:hover ~ .cursor {
+  transform:translate(-50%, -50%) scale(8);
+}
+
+
+@media screen and (max-width: 1024px) { 
+
+  .nav-wrapper nav {
+    flex-direction: column;
   }
 
-  span {
-    transition: color 350ms;
-    z-index: 1;
-  }
-
-  svg {
-    border-radius: 10px;
-    overflow: hidden;
-    position: absolute;
-    transform: skew(-15deg);
-
-    rect {
-      fill: #76b3fa;
-      shape-rendering: crispEdges;
-    }
-  }
 }
 
