@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おうまさん</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <div id="controls">
+    <!-- 進む ボタンはGIF画像 -->
+    <img id="goBtn" src="static/go_still.png" alt="Go" ontouchstart="startGo()" ontouchend="stopGo()">
+    
+    <!-- ボタンを横並び -->
+    <div id="buttonsRow">
+      <button id="leftBtn" ontouchstart="startLeft()" ontouchend="stopLeft()">Left</button>
+      <button id="rightBtn" ontouchstart="startRight()" ontouchend="stopRight()">Right</button>
+    </div>
+    
+    <!-- 下ボタン -->
+    <button id="backBtn" ontouchstart="startBack()" ontouchend="stopBack()">Back</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
