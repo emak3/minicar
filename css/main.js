@@ -1,52 +1,30 @@
-class RadioButtonEffect {
-  constructor(radioBtnGroups) {
-    this.previousRadioBtn = null;
+(function () {
 
-    radioBtnGroups.forEach((group) => {
-      const radioBtn = gsap.utils.selector(group)("input[type='radio']")[0];
-      const nodes = this.getNodes(radioBtn);
+      const link = document.querySelectorAll('nav > .link');
+      const cursor = document.querySelector('.cursor');
 
-      radioBtn.addEventListener("change", () => {
-        if (this.previousRadioBtn && this.previousRadioBtn !== radioBtn) {
-          this.changeEffect(this.getNodes(this.previousRadioBtn), false);
-        }
+      const animateit = function (e) {
+            const span = this.querySelector('.link > span');
+            const { offsetX: x, offsetY: y } = e,
+            { offsetWidth: width, offsetHeight: height } = this,
 
-        this.changeEffect(nodes, true);
-        this.previousRadioBtn = radioBtn;
-      });
-    });
-  }
+            move = 25,
+            xMove = x / width * (move * 2) - move,
+            yMove = y / height * (move * 2) - move;
 
-  getNodes(radioBtn) {
-    const container = radioBtn.closest(".radio-btn-group");
-    return gsap.utils.selector(container)("rect");
-  }
+            span.style.transform = `translate(${xMove}px, ${yMove}px)`;
 
-  changeEffect(nodes, isChecked) {
-    gsap.to(nodes, {
-      duration: 0.4,
-      ease: "steps(10)",
-      x: isChecked ? "100%" : "-100%",
-      stagger: 0.01,
-      overwrite: true
-    });
+            if (e.type === 'mouseleave') span.style.transform = '';
+      };
 
-    gsap.fromTo(
-      nodes,
-      {
-        fill: "#5dc975"
-      },
-      {
-        fill: "#76fa93",
-        duration: 0.1,
-        ease: "bounce.out",
-        repeat: -1
-      }
-    );
-  }
-}
+      const editCursor = e => {
+            const { clientX: x, clientY: y } = e;
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+      };
 
-document.addEventListener("DOMContentLoaded", () => {
-  const radioBtnGroups = document.querySelectorAll(".radio-btn-group");
-  new RadioButtonEffect(radioBtnGroups);
-});
+      link.forEach(b => b.addEventListener('mousemove', animateit));
+      link.forEach(b => b.addEventListener('mouseleave', animateit));
+      window.addEventListener('mousemove', editCursor);
+
+})();
