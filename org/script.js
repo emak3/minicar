@@ -9,13 +9,13 @@ let isGoPressed = false;
 
     function startGo() {
         isGoPressed = true;
-        document.getElementById('goBtn').src = "static/go.gif";  // GIFを再生
+        document.getElementById('goBtn').src = "gif/go.gif";  // GIFを再生
         sendRequest('Go');  // Goボタンが押された時に即座にコマンドを送信
     }
 
     function stopGo() {
         isGoPressed = false;
-        document.getElementById('goBtn').src = "static/go_still.png";  // GIFを停止
+        document.getElementById('goBtn').src = "gif/go_still.png";  // GIFを停止
         sendRequest('StopMovement');  // Goボタンが離された時、移動を停止
     }
 
